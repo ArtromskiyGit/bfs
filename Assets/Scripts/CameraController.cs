@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        dragReceiver.OnDrag += Move;
+        dragReceiver.Drag += Move;
     }
 
     private void Update()
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     private void Zoom()
     {
         var scrollDelta = Input.mouseScrollDelta;
-        normalizedZoom = Mathf.Clamp01(normalizedZoom + scrollDelta);
+        normalizedZoom = Mathf.Clamp01(normalizedZoom + scrollDelta.magnitude);
 
         camera.orthographicSize = Mathf.Lerp(minOrthographicSize, maxOrthopraghicSize, normalizedZoom);
     }
