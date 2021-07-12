@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float minOrthographicSize;
     [SerializeField] private float maxOrthopraghicSize;
      
-    private Camera camera;
+    private Camera cam;
     private Vector3 oldWorldPoint;
     private float normalizedZoom;
 
@@ -24,10 +24,10 @@ public class CameraController : MonoBehaviour
     
     private void Move(Vector2 screenDelta)
     {
-        var worldPoint = camera.ScreenToWorldPoint(screenDelta);
+        var worldPoint = cam.ScreenToWorldPoint(screenDelta);
         var worldDelta = -(worldPoint - oldWorldPoint);
 
-        oldWorldPoint = camera.ScreenToWorldPoint(screenDelta);
+        oldWorldPoint = cam.ScreenToWorldPoint(screenDelta);
         
         transform.position += worldDelta;
     }
@@ -37,6 +37,6 @@ public class CameraController : MonoBehaviour
         var scrollDelta = Input.mouseScrollDelta;
         normalizedZoom = Mathf.Clamp01(normalizedZoom + scrollDelta.magnitude);
 
-        camera.orthographicSize = Mathf.Lerp(minOrthographicSize, maxOrthopraghicSize, normalizedZoom);
+        cam.orthographicSize = Mathf.Lerp(minOrthographicSize, maxOrthopraghicSize, normalizedZoom);
     }
 }
